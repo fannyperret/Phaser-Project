@@ -4,8 +4,11 @@
       preload: preload,
       create: create,
       update: update,
+      updateLine: updateLine,
+      nextLine: nextLine,
       distanceToPointer: distanceToPointer,
       moveToXY: moveToXY,
+      start: start,
       render: render,
     });
 

@@ -1,4 +1,3 @@
-window.onload = function() {
 
     var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-project',
     {
@@ -7,8 +6,9 @@ window.onload = function() {
       update: update,
       distanceToPointer: distanceToPointer,
       moveToXY: moveToXY,
-      render: render
+      render: render,
     });
+
 
     var sprite;
     var counter = 0;
@@ -25,7 +25,7 @@ window.onload = function() {
     "Dirigé par Sydo",
     "Créé par Sydo",
     " ",
-    "Ici tu verras des jeux pédagogiques",
+    "Ici tu joueras...",
     "pour apprendre en t'amusant !",
     "Click sur l'écran pour commencer !"
 
@@ -37,21 +37,22 @@ window.onload = function() {
 
 function preload() {
 
-    // Load images to use as the game sprites
-    game.load.image('logo', 'assets/sprites/sydo-logo.jpg');
+  game.stage.backgroundColor = '#024542';
 
+    // Load images to use as the game sprites
+    // game.load.image(200, 360, 'pikachu', 'assets/sprites/pikachu.png', 16, 16);
+    game.load.image('logo', 'assets/sprites/sydo-logo.jpg');
+    // Load music
     game.load.audio('music', 'assets/audio/logo-music.mp3');
 
 };
 
 function create() {
 
-  game.stage.backgroundColor = '#024542';
-
   music = game.add.audio('music');
   music.onDecoded.add(start, this);
 
-  text = game.add.text(400, 550, '', { font: "30pt Courier", fill: "#19cb65", stroke: "#119f4e", strokeThickness: 2 });
+  text = game.add.text(400, 550, '', { font: "Courier" });
   nextLine();
 
   // text = game.add.text(game.world.centerX, 550, 'Serious Game');
@@ -61,7 +62,9 @@ function create() {
   text.fill = '#ffffff';
   text.setShadow(0,0, 'rgba(0, 0, 0, 0.5)', 0);
 
-    // Create sprite and put it in the middle of the stage
+
+
+  // Create sprite and put it in the middle of the stage
     sprite = game.add.sprite(0, 0, 'logo');
     sprite.alpha = 0.5;
     sprite.x = game.width / 2;
@@ -140,7 +143,5 @@ function render() {
     game.debug.spriteInfo(sprite, 32, 32);
     // Audio debug info
     game.debug.soundInfo(music, 450, 32);
-
-};
 
 };

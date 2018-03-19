@@ -1,5 +1,5 @@
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-project',
+    var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-project',
     {
       preload: preload,
       create: create,
@@ -10,8 +10,27 @@
       moveToXY: moveToXY,
       start: start,
       render: render,
+      removeText: removeText,
     });
 
+    var ship = [
+      '.....DEEEEEED...',
+      '.....EEEEEFFE...',
+      '.....EEEDDFFE...',
+      '334..EEDDDDEE...',
+      '3333.EEDDDDEE...',
+      '33333EEDDDDEE...',
+      '.FF2222222222F..',
+      '.F222222222222F.',
+      '.22222222222222F',
+      '4443322222222222',
+      '44433FFFFFFFFFFF',
+      '.111FFFFFFFFFFF.',
+      '.11FFFFFFFFFFF..',
+      '.1FFFFFFFFFF1...',
+      '...3333.........',
+      '...333..........'
+    ];
 
     var sprite;
     var counter = 0;
@@ -30,7 +49,7 @@
     " ",
     "Ici tu joueras...",
     "pour apprendre en t'amusant !",
-    "Click sur l'écran pour commencer !"
+    "Clique sur l'écran pour commencer !"
 
 ];
     var text;
@@ -43,14 +62,20 @@ function preload() {
   game.stage.backgroundColor = '#024542';
 
     // Load images to use as the game sprites
-    // game.load.image(200, 360, 'pikachu', 'assets/sprites/pikachu.png', 16, 16);
+
     game.load.image('logo', 'assets/sprites/sydo-logo.jpg');
     // Load music
-    game.load.audio('music', 'assets/audio/logo-music.mp3');
+    game.load.audio('music', 'assets/audio/music-logo.mp3');
 
 };
 
 function create() {
+
+  var pixelWidth = 4;
+  var pixelHeight = 4;
+
+  game.create.texture('ship', ship, pixelWidth, pixelHeight);
+  game.add.sprite(650, 350, 'ship').anchor.y = 1;
 
   music = game.add.audio('music');
   music.onDecoded.add(start, this);
@@ -65,7 +90,8 @@ function create() {
   text.fill = '#ffffff';
   text.setShadow(0,0, 'rgba(0, 0, 0, 0.5)', 0);
 
-
+  //  Click to remove text
+  game.input.onDown.addOnce(removeText, this);
 
   // Create sprite and put it in the middle of the stage
     sprite = game.add.sprite(0, 0, 'logo');
@@ -148,3 +174,9 @@ function render() {
     game.debug.soundInfo(music, 450, 32);
 
 };
+
+function removeText() {
+
+    text.destroy();
+
+}

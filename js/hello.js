@@ -65,7 +65,7 @@ function preload() {
 
     game.load.image('logo', 'assets/sprites/sydo-logo.jpg');
     // Load music
-    game.load.audio('music', 'assets/audio/music-logo.mp3');
+    game.load.audio('music', 'assets/audio/logo-music.mp3');
 
 };
 
